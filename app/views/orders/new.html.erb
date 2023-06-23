@@ -1,0 +1,12 @@
+<header>Исключить ингредиенты</header>
+<%= form_for :orders, url: create_orders_path, method: :post do |f| %>
+  <ul>
+    <% @ingredients.each do |ingredient| %>
+        <li>
+          <%= check_box_tag 'ingredient_ids[]', ingredient.id -%>
+          <%= h ingredient.name -%>
+        </li>
+    <% end %>
+  </ul>
+  <%= f.submit %>
+<% end %>

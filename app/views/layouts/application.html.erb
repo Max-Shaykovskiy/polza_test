@@ -11,6 +11,14 @@
   </head>
 
   <body>
+    <% flash.each do |(type, message)| %>
+      <div>
+        <span><%= message %></span>
+      </div>
+    <% end %>
+    <%= link_to 'Main', root_path %>
+    <%= link_to 'New Dishes', new_dishes_path %>
+    <%= link_to 'Cooking order', cooking_order_path(format: :json) %>
     <%= yield %>
   </body>
 </html>

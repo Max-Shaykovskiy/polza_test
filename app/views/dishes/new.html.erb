@@ -1,0 +1,4 @@
+<%= form_for :dishes, url: create_dishes_path, method: :post do |f| %>
+  <%= f.file_field :yml %>
+  <%= f.submit %>
+<% end %>
