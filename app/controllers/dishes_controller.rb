@@ -2,12 +2,15 @@
 
 class DishesController < ApplicationController
   def create
-    tempfile = params.dig(:dishes, :yml)&.tempfile
-    dishes = YAML.safe_load_file(tempfile) if File.extname(tempfile) == '.yml'
+    tempfile = params.dig(:menu, :yml)&.tempfile
 
-    if dishes
+    if tempfile && File.extname(tempfile) == '.yml'
+      menu = YAML.safe_load_file(tempfile)
+    end
+
+    if menu
       flash[:settings_notice] = 'menu loaded from file'
-      ImportDishesWorker.perform_async(dishes)
+      ImportDishesWorker.perform_async(menu)
     end
 
     redirect_to new_dishes_path
